@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floppykart Store</title>
+
+<style>
+body {font-family: Arial; margin:0;}
+header {background:#0d1b2a;color:#fff;padding:15px;text-align:center;}
+nav {background:#1b263b;padding:10px;text-align:center;}
+nav a {color:#fff;margin:10px;text-decoration:none;}
+.container {padding:20px;}
+.products {display:flex;flex-wrap:wrap;justify-content:center;}
+.product {border:1px solid #ccc;margin:10px;padding:10px;width:200px;text-align:center;}
+button {padding:8px;background:green;color:#fff;border:none;cursor:pointer;}
+.cart {position:fixed;right:10px;top:10px;background:#fff;border:1px solid #ccc;padding:10px;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Floppykart</h2>
+<p>Computer Zone Bhilai</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#products">Products</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="cart">
+<h4>Cart</h4>
+<ul id="cart-items"></ul>
+<button onclick="checkout()">Checkout</button>
+</div>
+
+<div class="container">
+<h2 id="products">Products</h2>
+
+<div class="products">
+<div class="product">
+<h4>Laptop Charger</h4>
+<p>₹1200</p>
+<button onclick="addToCart('Laptop Charger',1200)">Add to Cart</button>
+</div>
+
+<div class="product">
+<h4>Wireless Mouse</h4>
+<p>₹500</p>
+<button onclick="addToCart('Wireless Mouse',500)">Add to Cart</button>
+</div>
+
+<div class="product">
+<h4>CCTV Camera</h4>
+<p>₹1500</p>
+<button onclick="addToCart('CCTV Camera',1500)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<div class="container" id="contact">
+<h2>Contact</h2>
+<p>Mobile: 8109105896</p>
+<button onclick="window.location.href='https://wa.me/918109105896'">Chat on WhatsApp</button>
+</div>
+
+<script>
+let cart = [];
+
+function addToCart(name, price){
+  cart.push({name, price});
+  displayCart();
+}
+
+function displayCart(){
+  let list = document.getElementById('cart-items');
+  list.innerHTML='';
+  cart.forEach(item=>{
+    let li=document.createElement('li');
+    li.innerText=item.name + ' - ₹' + item.price;
+    list.appendChild(li);
+  });
+}
+
+function checkout(){
+  let text = 'Order:%0A';
+  cart.forEach(item=>{
+    text += item.name + ' - ₹' + item.price + '%0A';
+  });
+  window.location.href = 'https://wa.me/918109105896?text=' + text;
+}
+</script>
+
+</body>
+</html>
